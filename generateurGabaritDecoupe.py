@@ -53,13 +53,12 @@ if __name__ == '__main__':
 
     # Matrice de cercles ..........................................................
     deplacement_y = 2
-    pas = 10
     for speed in [1,2,3,4,5,6,7,8,9,10]:
         f.write( "; Ligne "+str(speed)+" -----------------------------------\n" )
         deplacement_x = 2
 
 
-        for power in range(0,100,pas):
+        for power in [10,20,30,40,50,60,70,80,90,100]:
             f.write( "; Puissance " + str(power) +  ", Speed " + str(speed)+"\n" )
 
             # Placement
@@ -125,7 +124,7 @@ if __name__ == '__main__':
     deplacement_x = 2
     positionY = 5
     f.write("G0 X0 Y0\n")
-    for power in range(0,100,pas):
+    for power in [10,20,30,40,50,60,70,80,90,100]:
         # Placement
         positionX = deplacement_x * offset_x +1
         f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
