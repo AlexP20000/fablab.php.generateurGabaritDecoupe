@@ -7,7 +7,7 @@ Le code généré est sous forme de matrice
 from inc import functions as gcode
 
 def ecritChiffres(chiffre):
-    chaine = ""
+    chaine = ";Chiffre ******************************"
     for number in str(chiffre):
         if( number == 0):
             chaine += gcode.zero()
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
 
 
-    # Abscisse  ..................................................................
+    # Ordonnées  ..................................................................
     deplacement_y = 2
     largeurLettre = 2
     f.write("G0 X0 Y0\n")
