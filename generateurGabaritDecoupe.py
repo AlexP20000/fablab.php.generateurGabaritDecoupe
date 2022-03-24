@@ -6,24 +6,37 @@ Le code généré est sous forme de matrice
 '''
 from inc import functions as gcode
 
-def ecritChiffres(chiffre):
-    chaine = ";Chiffre ******************************"
+def ecritChiffres(chiffre, X, Y, largeurLettre):
+    chaine = ";Chiffre "+ str(chiffre) + "\n"
     for number in str(chiffre):
-        if( number == 0):
+        if( number == "0"):
             chaine += gcode.zero()
-        elif( number ==1 ):
+        elif( number =="1" ):
             chaine += gcode.un()
+        elif (number == "2"):
+            chaine += gcode.deux()
+        elif (number == "3"):
+            chaine += gcode.trois()
+        elif (number == "4"):
+            chaine += gcode.quatre()
+        elif (number == "5"):
+            chaine += gcode.cinq()
+        elif (number == "6"):
+            chaine += gcode.six()
+        elif (number == "7"):
+            chaine += gcode.sept()
+        elif (number == "8"):
+            chaine += gcode.huit()
+        elif (number == "9"):
+            chaine += gcode.neuf()
+
+        chaine += gcode.lettreSuivante(X, Y, largeurLettre)
 
     return chaine
 
 
 
-def lettreSuivante(x, y):
-    chaine = "G0 X0 Y0\n"
-    chaine += "G92 X" + str(x) + " Y" + str(y) + "\n"
-    chaine += "G0 X" + str(x + largeurLettre) + " Y" + str(y) + "\n"
-    chaine += "G92 X0 Y0\n"
-    return chaine
+
 
 
 # Main programm ==================================================================
@@ -74,7 +87,7 @@ if __name__ == '__main__':
 
     f.write("G0 X1 Y105\n")
     f.write("G92 X0 Y0\n")
-    f.write( gcode.textSpeed())
+    f.write( gcode.textSpeed() )
     f.write("G0 X0 Y0\n")
     f.write("G92 X1 Y105\n")
 
@@ -83,61 +96,51 @@ if __name__ == '__main__':
     # Ordonnées  ..................................................................
     deplacement_y = 2
     largeurLettre = 2
+    positionX = 5
     f.write("G0 X0 Y0\n")
     for speed in range(6, 15, pas):
         # Placement
-        f.write("G0 X5 Y" + str(deplacement_y * offset_y -3) + "\n")
+        positionY = deplacement_y * offset_y -3
+        f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
         f.write("G92 X0 Y0\n")
+
 
         # Trace du 1er chiffre (dans nouveau repère)
         f.write("; Speed " + str(speed) + " -------------------------------------\n")
-        ecritChiffres(speed)
+        f.write( ecritChiffres(speed,positionX, positionY, largeurLettre ) )
 
 
         # Repositionnement dans l'ancien repère
         f.write("G0 X0 Y0\n")
-        f.write("G92 X5 Y" + str(deplacement_y * offset_y -3) + "\n")
+        f.write("G92 X"+ str(positionX + largeurLettre * len(str(speed)))+" Y" + str(positionY) + "\n")
 
         deplacement_y += 1
 
 
 
-
-    '''
-    deplacement_y = 0
-    largeurLettre = 2
+    # Abscisse  ..................................................................
+    deplacement_x = 2
+    positionY = 5
     f.write("G0 X0 Y0\n")
-    for speed in range(6,15,pas):
-        deplacement_x = 2
-        for power in range(6,15,pas):
-            f.write("\n; Puissance " + str(power) + ", Speed " + str(speed) + " --------------------------\n")
-
-            # Placement
-            f.write("G0 X" + str(deplacement_x * offset_x) + " Y" + str(deplacement_y * offset_y) + "\n")
-            f.write("G92 X0 Y0\n")
-
-            # Trace du 1er chiffre (dans nouveau repère)
-            f.write( cinq() )
-
-            # deplacement pour la lettre suivante
-            f.write( lettreSuivante(deplacement_x * offset_x, deplacement_y * offset_y))
-            f.write( six() )
-
-            f.write(lettreSuivante(deplacement_x * offset_x+ largeurLettre, deplacement_y * offset_y))
-            f.write(sept())
-
-            f.write(lettreSuivante(deplacement_x * offset_x+ largeurLettre*2, deplacement_y * offset_y))
-            f.write(huit())
+    for power in range(6, 15, pas):
+        # Placement
+        positionX = deplacement_x * offset_x +1
+        f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
+        f.write("G92 X0 Y0\n")
 
 
-            # Repositionnement dans l'ancien repère
-            f.write("G0 X0 Y0\n")
-            f.write("G92 X" + str(deplacement_x * offset_x + largeurLettre *3) + " Y" + str(deplacement_y * offset_y) + "\n")
+        # Trace du 1er chiffre (dans nouveau repère)
+        f.write("; Speed " + str(power) + " -------------------------------------\n")
+        f.write( ecritChiffres(power,positionX, positionY, largeurLettre ) )
 
 
-            deplacement_x += 1
-        deplacement_y += 1
-    '''
+        # Repositionnement dans l'ancien repère
+        f.write("G0 X0 Y0\n")
+        f.write("G92 X"+ str(positionX + largeurLettre * len(str(power)))+" Y" + str(positionY) + "\n")
+
+        deplacement_x += 1
+
+
 
 
     # Carre de découpe .............................................................

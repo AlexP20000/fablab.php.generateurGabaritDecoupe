@@ -1,9 +1,16 @@
 '''
 Functions retournant du gcode pour écrire des nombres.
 '''
+def lettreSuivante(x, y, largeurLettre):
+    chaine = "G0 X0 Y0\n"
+    chaine += "G92 X" + str(x) + " Y" + str(y) + "\n"
+    chaine += "G0 X" + str(x + largeurLettre) + " Y" + str(y) + "\n"
+    chaine += "G92 X0 Y0\n"
+    return chaine
 
 def zero():
-    return """G0 X0.8636 Y3.05 F10000
+    return """; 0 -------------
+G0 X0.8636 Y3.05 F10000
 G1 X0.4064 Y2.8976 S0 F1200
 G1 X0.1016 Y2.4912
 G1 X0 Y1.7292
@@ -23,14 +30,16 @@ G1 X0.8636 Y3.05
 G0 X0 Y0"""
 
 def un():
-    return """G0 X0 Y2.4912 F10000
+    return """; 1  -------------
+G0 X0 Y2.4912 F10000
 G1 X0.254 Y2.5928 S0 F1200
 G1 X0.7112 Y3.05
 G1 X0.7112 Y0.002
 G0 X0 Y0"""
 
 def deux():
-    return"""G0 X0.1016 Y2.3388 F10000
+    return"""; 2 -------------
+G0 X0.1016 Y2.3388 F10000
 G1 X0.1016 Y2.4912 S0 F1200
 G1 X0.254 Y2.7452
 G1 X0.4064 Y2.8976
@@ -47,7 +56,8 @@ G1 X1.9812 Y0.002
 G0 X0 Y0"""
 
 def trois():
-    return """G0 X0.254 Y3.05 F10000
+    return """; 3 -------------
+G0 X0.254 Y3.05 F10000
 G1 X1.8288 Y3.05 S0 F1200
 G1 X0.9652 Y1.8816
 G1 X1.4224 Y1.8816
@@ -65,7 +75,8 @@ G1 X0 Y0.6116
 G0 X0 Y0"""
 
 def quatre():
-    return"""G0 X1.4224 Y3.05 F10000
+    return"""; 4 -------------
+G0 X1.4224 Y3.05 F10000
 G1 X0 Y1.018 S0 F1200
 G1 X2.1336 Y1.018
 G0 X1.4224 Y0.002 F10000
@@ -73,7 +84,8 @@ G1 X1.4224 Y3.05 F1200
 G0 X0 Y0"""
 
 def cinq():
-    return """G0 X1.7272 Y3.05 F10000
+    return """; 5 -------------
+G0 X1.7272 Y3.05 F10000
 G1 X0.254 Y3.05 S0 F1200
 G1 X0.1016 Y1.7292
 G1 X0.254 Y1.8816
@@ -93,7 +105,8 @@ G1 X0 Y0.6116
 G0 X0 Y0"""
 
 def six():
-    return """G0 X1.7272 Y2.5928 F10000
+    return """; 6 -------------
+G0 X1.7272 Y2.5928 F10000
 G1 X1.5748 Y2.8976 S0 F1200
 G1 X1.1176 Y3.05
 G1 X0.8636 Y3.05
@@ -119,14 +132,16 @@ G1 X0 Y1.018
 G0 X0 Y0"""
 
 def sept():
-    return """G0 X1.9812 Y3.05 F10000
+    return """; 7 -------------
+G0 X1.9812 Y3.05 F10000
 G1 X0.5588 Y0.002 S0 F1200
 G0 X0 Y3.05 F10000
 G1 X1.9812 Y3.05 F1200
 G0 X0 Y0"""
 
 def huit():
-    return"""G0 X0.7112 Y3.05 F10000
+    return"""; 8 -------------
+G0 X0.7112 Y3.05 F10000
 G1 X0.254 Y2.8976 S0 F1200
 G1 X0.1016 Y2.5928
 G1 X0.1016 Y2.3388
@@ -158,7 +173,8 @@ G1 X0.7112 Y3.05
 G0 X0 Y0"""
 
 def neuf():
-    return """G0 X1.8288 Y2.034 F10000
+    return """; 9 -------------
+G0 X1.8288 Y2.034 F10000
 G1 X1.7272 Y1.6276 S0 F1200
 G1 X1.4224 Y1.3228
 G1 X0.9652 Y1.1704
@@ -184,7 +200,8 @@ G1 X0.1016 Y0.4592
 G0 X0 Y0"""
 
 def textSpeed():
-    return"""G0 X2.4384 Y4.32 F10000
+    return"""; Speed -------------
+G0 X2.4384 Y4.32 F10000
 G1 X2.0828 Y4.6756 S0 F1200
 G1 X1.5748 Y4.828
 G1 X0.9144 Y4.828
@@ -273,7 +290,8 @@ G1 X14.7828 Y1.272 F1200
 G0 X0 Y0"""
 
 def textPower():
-    return """G0 X0.0508 Y3.558 F10000
+    return """; Power -------------
+G0 X0.0508 Y3.558 F10000
 G1 X0.0508 Y0.1036 S0 F1200
 G0 X0.0508 Y1.78 F10000
 G1 X1.524 Y1.78 F1200
