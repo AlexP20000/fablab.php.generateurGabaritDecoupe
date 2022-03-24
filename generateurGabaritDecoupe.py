@@ -53,13 +53,13 @@ if __name__ == '__main__':
 
     # Matrice de cercles ..........................................................
     deplacement_y = 2
-    pas = 1
-    for speed in range(6,15,pas):
+    pas = 10
+    for speed in [1,2,3,4,5,6,7,8,9,10]:
         f.write( "; Ligne "+str(speed)+" -----------------------------------\n" )
         deplacement_x = 2
 
 
-        for power in range(6,15,pas):
+        for power in range(0,100,pas):
             f.write( "; Puissance " + str(power) +  ", Speed " + str(speed)+"\n" )
 
             # Placement
@@ -79,17 +79,20 @@ if __name__ == '__main__':
 
 
     # Legende ..................................................................
-    f.write("G0 X105 Y1\n")
-    f.write("G92 X0 Y0\n")
-    f.write( gcode.textPower() )
-    f.write("G0 X0 Y0\n")
-    f.write("G92 X105 Y1\n")
-
-    f.write("G0 X1 Y105\n")
+    positionY = 113
+    f.write("G0 X1 Y"+str(positionY)+"\n")
     f.write("G92 X0 Y0\n")
     f.write( gcode.textSpeed() )
     f.write("G0 X0 Y0\n")
-    f.write("G92 X1 Y105\n")
+    f.write("G92 X1 Y"+str(positionY)+"\n")
+
+    positionX = 105
+    f.write("G0 X"+str(positionX)+" Y1\n")
+    f.write("G92 X0 Y0\n")
+    f.write( gcode.textPower() )
+    f.write("G0 X0 Y0\n")
+    f.write("G92 X"+str(positionX)+" Y1\n")
+
 
 
 
@@ -98,7 +101,7 @@ if __name__ == '__main__':
     largeurLettre = 2
     positionX = 5
     f.write("G0 X0 Y0\n")
-    for speed in range(6, 15, pas):
+    for speed in [1,2,3,4,5,6,7,8,9,10]:
         # Placement
         positionY = deplacement_y * offset_y -3
         f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
@@ -122,7 +125,7 @@ if __name__ == '__main__':
     deplacement_x = 2
     positionY = 5
     f.write("G0 X0 Y0\n")
-    for power in range(6, 15, pas):
+    for power in range(0,100,pas):
         # Placement
         positionX = deplacement_x * offset_x +1
         f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
