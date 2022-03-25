@@ -44,7 +44,11 @@ if __name__ == '__main__':
     diametre = 4
     offset_x = 10
     offset_y = 10
-    fileName = "Testdecoupe.gcode"
+    fileName = "C:/Users/Alex/Documents/GabaritDecoupe.gcode"
+    # 10 valeur
+    speedRange = [1,2,5,7,10,15,20]
+    powerRange = [6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9]
+
 
 
 
@@ -53,12 +57,12 @@ if __name__ == '__main__':
 
     # Matrice de cercles ..........................................................
     deplacement_y = 2
-    for speed in [1,2,3,4,5,6,7,8,9,10]:
+    for speed in speedRange:
         f.write( "; Ligne "+str(speed)+" -----------------------------------\n" )
         deplacement_x = 2
 
 
-        for power in [10,20,30,40,50,60,70,80,90,100]:
+        for power in powerRange:
             f.write( "; Puissance " + str(power) +  ", Speed " + str(speed)+"\n" )
 
             # Placement
@@ -100,7 +104,7 @@ if __name__ == '__main__':
     largeurLettre = 2
     positionX = 5
     f.write("G0 X0 Y0\n")
-    for speed in [1,2,3,4,5,6,7,8,9,10]:
+    for speed in speedRange:
         # Placement
         positionY = deplacement_y * offset_y -3
         f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
@@ -124,7 +128,7 @@ if __name__ == '__main__':
     deplacement_x = 2
     positionY = 5
     f.write("G0 X0 Y0\n")
-    for power in [10,20,30,40,50,60,70,80,90,100]:
+    for power in powerRange:
         # Placement
         positionX = deplacement_x * offset_x +1
         f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
