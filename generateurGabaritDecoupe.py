@@ -7,7 +7,7 @@ Le code généré est sous forme de matrice
 from inc import functions as gcode
 
 def ecritChiffres(chiffre, X, Y, largeurLettre):
-    chaine = ";Chiffre "+ str(chiffre) + "\n"
+    chaine = ""
     for number in str(chiffre):
         if( number == "0"):
             chaine += gcode.zero()
@@ -29,6 +29,8 @@ def ecritChiffres(chiffre, X, Y, largeurLettre):
             chaine += gcode.huit()
         elif (number == "9"):
             chaine += gcode.neuf()
+        elif (number == "."):
+            chaine += gcode.point()
 
         chaine += gcode.lettreSuivante(X, Y, largeurLettre)
 
@@ -46,8 +48,9 @@ if __name__ == '__main__':
     offset_y = 10
     fileName = "C:/Users/Alex/Documents/GabaritDecoupe.gcode"
     # 10 valeur
-    speedRange = [1,2,5,7,10,15,20]
+    speedRange = [1,2,5,7,10,11,12,13,14,15]
     powerRange = [6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9]
+
 
 
 
@@ -73,7 +76,7 @@ if __name__ == '__main__':
             f.write(" I"+str(diametre / 2)+" J-"+str(diametre / 2)+" E10")
 
             # speed & power
-            f.write(" S"+str(power / 10)+" F"+str(600 * speed)+ "\n")
+            f.write(" S"+str(power / 100)+" F"+str(60 * speed)+ "\n")
 
             deplacement_x += 1
         deplacement_y += 1
@@ -90,10 +93,9 @@ if __name__ == '__main__':
     f.write("G92 X1 Y"+str(positionY)+"\n")
 
     positionX = 105
-    f.write("G0 X"+str(positionX)+" Y1\n")
+    f.write("G0 X"+str(positionX)+" Y1 E10 S0.7 F12000\n")
     f.write("G92 X0 Y0\n")
     f.write( gcode.textPower() )
-    f.write("G0 X0 Y0\n")
     f.write("G92 X"+str(positionX)+" Y1\n")
 
 
@@ -103,6 +105,7 @@ if __name__ == '__main__':
     deplacement_y = 2
     largeurLettre = 2
     positionX = 5
+    f.write("; ORDONNEES ================================================\n")
     f.write("G0 X0 Y0\n")
     for speed in speedRange:
         # Placement
@@ -117,7 +120,6 @@ if __name__ == '__main__':
 
 
         # Repositionnement dans l'ancien repère
-        f.write("G0 X0 Y0\n")
         f.write("G92 X"+ str(positionX + largeurLettre * len(str(speed)))+" Y" + str(positionY) + "\n")
 
         deplacement_y += 1
@@ -127,6 +129,7 @@ if __name__ == '__main__':
     # Abscisse  ..................................................................
     deplacement_x = 2
     positionY = 5
+    f.write("; ABSCISSES ================================================\n")
     f.write("G0 X0 Y0\n")
     for power in powerRange:
         # Placement
