@@ -44,13 +44,14 @@ def ecritChiffres(chiffre, X, Y, largeurLettre):
 # Main programm ==================================================================
 if __name__ == '__main__':
     diametre = 4
-    offset_x = 10
-    offset_y = 10
+    largeurMotif = 10
+    hauteurMotif = 10
     fileName = "C:/Users/Alex/Documents/GabaritDecoupe.gcode"
-    # 10 valeur
+    fileName = "GabaritDecoupe.gcode"
+
+    # valeurs possibles
     speedRange = [1,2,5,7,10,11,12,13,14,15]
     powerRange = [6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9]
-
 
 
 
@@ -69,10 +70,10 @@ if __name__ == '__main__':
             f.write( "; Puissance " + str(power) +  ", Speed " + str(speed)+"\n" )
 
             # Placement
-            f.write("G0 X"+ str(deplacement_x * offset_x )+" Y"+str(deplacement_y * offset_y )+"\n")
+            f.write("G0 X" + str(deplacement_x * largeurMotif) + " Y" + str(deplacement_y * hauteurMotif) + "\n")
 
             # PATERN : cercle (il prend en paramètre un rayon)
-            f.write("G02 X" + str(deplacement_x * offset_x) + " Y" + str(deplacement_y * offset_y))
+            f.write("G02 X" + str(deplacement_x * largeurMotif) + " Y" + str(deplacement_y * hauteurMotif))
             f.write(" I"+str(diametre / 2)+" J-"+str(diametre / 2)+" E10")
 
             # speed & power
@@ -85,14 +86,14 @@ if __name__ == '__main__':
 
 
     # Legende ..................................................................
-    positionY = 113
+    positionY = (len(speedRange) +1) * hauteurMotif
     f.write("G0 X1 Y"+str(positionY)+"\n")
     f.write("G92 X0 Y0\n")
     f.write( gcode.textSpeed() )
     f.write("G0 X0 Y0\n")
     f.write("G92 X1 Y"+str(positionY)+"\n")
 
-    positionX = 105
+    positionX = (len(powerRange) ) * largeurMotif
     f.write("G0 X"+str(positionX)+" Y1 E10 S0.7 F12000\n")
     f.write("G92 X0 Y0\n")
     f.write( gcode.textPower() )
@@ -109,7 +110,7 @@ if __name__ == '__main__':
     f.write("G0 X0 Y0\n")
     for speed in speedRange:
         # Placement
-        positionY = deplacement_y * offset_y -3
+        positionY = deplacement_y * hauteurMotif - 3
         f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
         f.write("G92 X0 Y0\n")
 
@@ -133,7 +134,7 @@ if __name__ == '__main__':
     f.write("G0 X0 Y0\n")
     for power in powerRange:
         # Placement
-        positionX = deplacement_x * offset_x +1
+        positionX = deplacement_x * largeurMotif + 1
         f.write("G0 X"+ str(positionX)+" Y" + str(positionY) + "\n")
         f.write("G92 X0 Y0\n")
 
@@ -153,11 +154,11 @@ if __name__ == '__main__':
 
 
     # Carre de découpe .............................................................
-    f.write("\n;Carre de decoupe ----------------------\n")
+    f.write("\n; Decoupe ----------------------\n")
     f.write("G0 X0 Y0 F10000\n")
-    f.write("G1 X120 Y0 S1 F600\n")
-    f.write("G1 X120 Y120 \n")
-    f.write("G1 X0 Y120 \n")
+    f.write("G1 X"+str((len(powerRange)+2) * largeurMotif)+" Y0 S1 F600\n")
+    f.write("G1 X"+str((len(powerRange)+2) * largeurMotif)+" Y"+str((len(speedRange) +2) * hauteurMotif)+" \n")
+    f.write("G1 X0 Y"+str((len(speedRange)+2) * hauteurMotif)+" \n")
     f.write("G1 X0 Y0 \n")
 
     f.write( gcode.footer() )
