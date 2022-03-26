@@ -1,7 +1,11 @@
-# Générateur de Gabarit de Découpe
-Générateur de Gcode pour faire des tests de découpe à la laser.
+# Gcode generator
+This generator will give a matrix of circles with your speed and power values.
 
-Scripts  permettant de générer un fichier gcode pour faire des gabarits de découpe pour la laser. 
-Il produit une grille de cercles en faisant varier la puissance et la vitesse (parémétrables)
+You can customise :
+* circle
+* speed range
+* power range
+* file name
 
-Le script existe en PHP et en Python, la version python est plus abouti.
+the PHP version is given as reference, but is no longer maintained. 
+Please use the Python script.

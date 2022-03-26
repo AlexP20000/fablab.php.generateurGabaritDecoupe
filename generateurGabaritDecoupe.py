@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
 '''
-Generateur de gcode
-Le code généré est sous forme de matrice
+Gcode generator
+This generator will give a matrix of circles with all the speed and power values you defined.
+
+@author : Alexandre PERETJATKO (2022)
 '''
 from inc import functions as gcode
 
@@ -13,7 +15,7 @@ fileName = "GabaritDecoupe.gcode"
 # Values you want for speed and power
 # You can set as many values you want (or generate in this 2 lists)
 speedRange = [1, 2, 5, 7, 10, 11, 12, 13, 14, 15,20]
-powerRange = [6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9,7]
+powerRange = [6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9,7,7.5,8,8.5,9,9.5,10]
 
 
 
@@ -21,7 +23,7 @@ powerRange = [6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9,7]
 
 # Main programm ==================================================================
 if __name__ == '__main__':
-    # Circle parameters
+    # Circle (the patern) parameters
     paternDiameter = 4
     paternWidth = 10
     paternHeight = 10
@@ -43,7 +45,7 @@ if __name__ == '__main__':
             # Placement
             f.write("G0 X" + str(deplacement_x * paternWidth) + " Y" + str(deplacement_y * paternHeight) + "\n")
 
-            # PATERN : cercle (il prend en paramètre un rayon)
+            # PATERN : circle is waiting a radius parameter
             f.write("G02 X" + str(deplacement_x * paternWidth) + " Y" + str(deplacement_y * paternHeight))
             f.write(" I" + str(paternDiameter / 2) + " J-" + str(paternDiameter / 2) + " E10")
 

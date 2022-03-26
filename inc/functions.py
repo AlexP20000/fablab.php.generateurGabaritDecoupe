@@ -1,5 +1,5 @@
 '''
-Functions retournant du gcode pour écrire des nombres.
+Here are all the function that returns the numbers gcode.
 '''
 def lettreSuivante(x, y, largeurLettre):
     chaine = "G0 X0 Y0\n"
@@ -212,7 +212,7 @@ G0 X0 Y0
 def point():
     return """
 G0 X0.6096 Y0.3576 F10000
-G1 X0.6604 Y0.5608 S0.07 F1200
+G1 X0.6604 Y0.5608 S0.07 F900
 G1 X0.8128 Y0.6116
 G1 X0.9652 Y0.5608
 G1 X1.016 Y0.3576
@@ -382,7 +382,9 @@ G0 X0 Y0
 """
 
 def entete():
-    return "G21\nG90\nM3\nM106\nG92 X0 Y0 Z0\n"
+    return ";This a generated GCODE, do not edit\n" \
+           ";===================================\n" \
+           "G21\nG90\nM3\nM106\nG92 X0 Y0 Z0\n"
 
 def footer():
     return "G0 X0 Y0\nM5\nM107\n"
