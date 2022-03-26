@@ -386,3 +386,35 @@ def entete():
 
 def footer():
     return "G0 X0 Y0\nM5\nM107\n"
+
+
+def ecritChiffres(chiffre, X, Y, largeurLettre):
+    chaine = ""
+    for number in str(chiffre):
+        if( number == "0"):
+            chaine += zero()
+        elif( number =="1" ):
+            chaine += un()
+        elif (number == "2"):
+            chaine += deux()
+        elif (number == "3"):
+            chaine += trois()
+        elif (number == "4"):
+            chaine += quatre()
+        elif (number == "5"):
+            chaine += cinq()
+        elif (number == "6"):
+            chaine += six()
+        elif (number == "7"):
+            chaine += sept()
+        elif (number == "8"):
+            chaine += huit()
+        elif (number == "9"):
+            chaine += neuf()
+        elif (number == "."):
+            chaine += point()
+
+        chaine += lettreSuivante(X, Y, largeurLettre)
+
+    return chaine
+
