@@ -2,40 +2,35 @@
 # -*- coding:utf-8 -*-
 '''
 Gcode generator
-This generator will give a matrix of circles (or patern) with all the speed and power values you defined.
+This generator will give a matrix of circles with all the speed and power values you defined.
 
 @author : Alexandre PERETJATKO (2022)
+@licence : CCbySA
 '''
 from inc import functions as gcode
 
-# File name for the gcode
-fileName = "GabaritDecoupe.gcode"
+# File name for the gcode storage
+fileName = "C:/Users/Alex/Documents/GabaritDecoupe.gcode"
 
 
 # Values you want for speed and power
 # You can set as many values you want (or generate in this 2 lists)
-speedRange = [10,20,30,40,50,60,70,80,90,100]
-powerRange = [10,20,30,40,50,60,70,80,90,100]
-
-
-
-# Patern or not patern ?
-# If the Circle diameter is > 0, the matrix will use a circle
-# If diameter =0, the patern will use the gcode defined in the gcode.patern() definition.
-circleDiameter = 0
-
-# Define the patern's size (or circle, regarding to the circle value)
-paternWidth = 25
-paternHeight = 25
+speedRange = [2,4,6,8,10,12,14,16,18,20]
+powerRange = [5,5.25,5.5,5.75,6,6.25,6.5,6.75,7]
 
 
 
 
 
 # Main programm ==================================================================
-# You don't have to modifiy the above lines.
-#
 if __name__ == '__main__':
+    # Circle (the patern) parameters
+    paternDiameter = 4
+    paternWidth = 10
+    paternHeight = 10
+
+
+
     f = open(fileName, "w")
     f.write( gcode.entete() )
 
@@ -52,17 +47,9 @@ if __name__ == '__main__':
             # Placement
             f.write("G0 X" + str(deplacement_x * paternWidth) + " Y" + str(deplacement_y * paternHeight) + "\n")
 
-            # PATERN
-            if (circleDiameter > 0):
-                # We use a circle (defined by his radius parameter)
-                f.write("G02 X" + str(deplacement_x * paternWidth) + " Y" + str(deplacement_y * paternHeight))
-                f.write(" I" + str(circleDiameter / 2) + " J-" + str(circleDiameter / 2) + " E10")
-            else:
-                # Patern (gcode defined)
-                f.write("G92 X0 Y0\n")
-                f.write( gcode.patern() )
-                f.write("G0 X0 Y0\n")
-                f.write("G92 X" + str(deplacement_x * paternWidth) + " Y" + str(deplacement_y * paternHeight) + "\n")
+            # PATERN : circle is waiting a radius parameter
+            f.write("G02 X" + str(deplacement_x * paternWidth) + " Y" + str(deplacement_y * paternHeight))
+            f.write(" I" + str(paternDiameter / 2) + " J-" + str(paternDiameter / 2) + " E10")
 
             # speed & power
             f.write(" S"+str(power / 100)+" F"+str(60 * speed)+ "\n")
