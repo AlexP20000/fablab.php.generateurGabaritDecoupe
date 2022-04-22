@@ -25,4 +25,4 @@ In main.py script, you can customise :
 This will produce a gcode file that you can visualise in [camotics ](https://camotics.org/). The gcode will display
 a grid with as many circles needed to cover all the possibility you defined in speed and power ranges.
 
-[Photo](./doc/photo.jpg)
+![Photo](./doc/photo.jpg)
